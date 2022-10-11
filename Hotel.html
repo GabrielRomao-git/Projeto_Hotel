@@ -313,10 +313,17 @@
 
 		function abastecer_carros() {
 			alert(`${hotel} - ABASTECER`);
-				var wayne_oil = [];
-				var stark_petrol = [];
+				var wayne_oil = []; //[0] = gasolina [1] = álcool
+				var stark_petrol = []; //[0] = gasolina [1] = álcool
 				const tanque = 42;
-				
+				wayne_oil.push(parseFloat(prompt(`${nome_usuario} qual o valor da gasolina no posto Wayne?`)));
+				wayne_oil.push(parseFloat(prompt(`${nome_usuario} qual o valor do álcool no posto Wayne?`)));
+				stark_petrol.push(parseFloat(prompt(`${nome_usuario} qual o valor da gasolina no posto Stark?`)));
+				stark_petrol.push(parseFloat(prompt(`${nome_usuario} qual o valor do álcool no posto Stark?`)));
+				while(wayne_oil[0] < stark_petrol[0] && wayne_oil[1] < stark_petrol[1]){
+					if
+				}
+
 				
 			inicio();
 		}

@@ -26,7 +26,7 @@
 		function inicio() {
 			bemvindo();
 			confirma_senha();
-			var escolha = parseInt(prompt('Selecione uma opção | 1. Reserva de Quartos | 2. Como Soletra | 3. Cadastro de Hóspedes | 4. Abastecimento de Carros | 5. Festa ou Trabalho | 6. Hora de Comer | 7. Auditório para Quantos | 8. Que horas você pode? | 9. Sair '));
+			var escolha = parseInt(prompt('Selecione uma opção | 1. Reserva de Quartos | 2. Como Soletra | 3. Cadastro de Hóspedes | 4. Abastecimento de Carros | 5. Festa ou Trabalho | 6. Hora de Comer | 7. Auditório para Quantos | 8. Que horas você pode? | 9. Ar puro | 10. Sair '));
 
 			switch (escolha) {
 				case  1: 
@@ -54,6 +54,9 @@
 					que_horas_voce_pode();
 					break;
 				case 9:
+					ar_puro();
+					break;
+				case 10:
 					sair();
 					break;
 				default:
@@ -313,19 +316,89 @@
 
 		function abastecer_carros() {
 			alert(`${hotel} - ABASTECER`);
-				var wayne_oil = []; //[0] = gasolina [1] = álcool
-				var stark_petrol = []; //[0] = gasolina [1] = álcool
+				let wayne_oil = []; //[0] = gasolina [1] = álcool
+				let stark_petrol = []; //[0] = gasolina [1] = álcool
 				const tanque = 42;
 				wayne_oil.push(parseFloat(prompt(`${nome_usuario} qual o valor da gasolina no posto Wayne?`)));
 				wayne_oil.push(parseFloat(prompt(`${nome_usuario} qual o valor do álcool no posto Wayne?`)));
 				stark_petrol.push(parseFloat(prompt(`${nome_usuario} qual o valor da gasolina no posto Stark?`)));
 				stark_petrol.push(parseFloat(prompt(`${nome_usuario} qual o valor do álcool no posto Stark?`)));
-				while(wayne_oil[0] < stark_petrol[0] && wayne_oil[1] < stark_petrol[1]){
-					if
+
+				wayne_oil[0] = (wayne_oil[0] * tanque) - (wayne_oil[0] * tanque * 0.3);
+				console.log(wayne_oil[0]);
+				wayne_oil[1] = (wayne_oil[1] * tanque);
+				console.log(wayne_oil[1]);
+				stark_petrol[0] = (stark_petrol[0] * tanque) - (stark_petrol[0] * tanque * 0.3);
+				console.log(stark_petrol[0]);
+				stark_petrol[1] = (stark_petrol[1] * tanque);
+				console.log(stark_petrol[1]);
+				
+				while(wayne_oil[0] < stark_petrol[0]) {
+					if(wayne_oil[1] <= wayne_oil[0]) {
+						alert(`${nome_usuario}, é mais barato abastecer com álcool no posto Wayne Petrol.`);
+						inicio();
+					}
+					else {
+						alert(`${nome_usuario}, é mais barato abastecer com gasolina no posto Wayne Petrol.`);
+						inicio();
+					}
 				}
 
-				
-			inicio();
+				while(stark_petrol[0] < wayne_oil[0]) {
+					if(stark_petrol[1] <= stark_petrol[0]) {
+						alert(`${nome_usuario}, é mais barato abastecer com álcool no posto Stark Petrol.`);
+						inicio();
+					} else {
+						alert(`${nome_usuario}, é mais barato abastecer com gasolina no posto Stark Petrol.`);
+						inicio();
+					}
+				}
+		}
+
+		function ar_puro() {
+			let nome_empresas = [];
+			let valor_aparelho = [];
+			const quantidade_aparelhos = [];
+			let desconto = [];
+			let numero_min = [];
+			let final = [];
+			var jj = 0;
+			var xx = 0;
+			
+			
+
+			for(jj ; jj < 10; jj++) {
+				nome_empresas.push(prompt('Qual o nome da empresa?'));
+				valor_aparelho.push(parseFloat(prompt('Qual o valor por aparelho?')));
+				quantidade_aparelhos.push(parseInt(prompt('Qual a quantidade de aparelhos?')));
+				desconto.push(parseInt(prompt('Qual a porcentagem de desconto?')));
+				numero_min.push(parseInt(prompt('Qual o número mínimo de aparelhos para conseguir o desconto?')));
+				var deseja = prompt(`Deseja informar novos dados, ${nome_usuario}? (S/N)`);
+				if(deseja === 'N' || deseja === 'Não') {
+					result();
+					jj = 10;
+				} else if (deseja === 'S' || deseja === 'Sim') {
+					alert('Então vamos lá!');
+				} else {
+					alert('Informação inválida, tente novamente.');
+					var deseja = prompt(`Deseja informar novos dados, ${nome_usuario}? (S/N)`);
+				}
+			}
+		function result () {
+			console.log(jj);
+			for(x = 0; x < jj; x++){
+				desconto[xx].push(desconto[xx] /100);
+				console.log(desconto);
+				if (quantidade_aparelhos >= numero_min[xx]){
+					final.push((quantidade_aparelhos * valor_aparelho[xx]) - ((quantidade_aparelhos * valor_aparelho[xx]) * desconto[xx]));
+				} else {
+					final.push(quantidade_aparelhos * valor_aparelho[xx]);
+				}
+			}
+		}
+
+
+
 		}
 
 		function erro() {

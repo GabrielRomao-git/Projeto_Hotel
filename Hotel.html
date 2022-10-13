@@ -361,21 +361,26 @@
 			const quantidade_aparelhos = [];
 			let desconto = [];
 			let numero_min = [];
-			let final = [];
+			let final = [];	
 			var jj = 0;
 			var xx = 0;
-			
-			
-
+		
 			for(jj ; jj < 10; jj++) {
 				nome_empresas.push(prompt('Qual o nome da empresa?'));
+				console.log(nome_empresas)
 				valor_aparelho.push(parseFloat(prompt('Qual o valor por aparelho?')));
 				quantidade_aparelhos.push(parseInt(prompt('Qual a quantidade de aparelhos?')));
 				desconto.push(parseInt(prompt('Qual a porcentagem de desconto?')));
 				numero_min.push(parseInt(prompt('Qual o número mínimo de aparelhos para conseguir o desconto?')));
 				var deseja = prompt(`Deseja informar novos dados, ${nome_usuario}? (S/N)`);
 				if(deseja === 'N' || deseja === 'Não') {
-					result();
+					conta();
+					xx++;
+					let min = Math.min(...final);
+					console.log(min);
+					let menor = final.indexOf(min);
+					console.log(menor);
+					alert(`${nome_usuario}, o orçamento de menor valor é o da ${nome_empresas[menor]} que custará: R$${min}.`);
 					jj = 10;
 				} else if (deseja === 'S' || deseja === 'Sim') {
 					alert('Então vamos lá!');
@@ -384,20 +389,24 @@
 					var deseja = prompt(`Deseja informar novos dados, ${nome_usuario}? (S/N)`);
 				}
 			}
-		function result () {
-			console.log(jj);
-			for(x = 0; x < jj; x++){
-				desconto[xx].push(desconto[xx] /100);
+			
+		function conta () {
+			console.log(xx);
+			for(x = 0 ; x < jj; x++) {
+				desconto[xx] = (desconto[xx] /100);
 				console.log(desconto);
 				if (quantidade_aparelhos >= numero_min[xx]){
-					final.push((quantidade_aparelhos * valor_aparelho[xx]) - ((quantidade_aparelhos * valor_aparelho[xx]) * desconto[xx]));
+					final.push((quantidade_aparelhos * valor_aparelho[xx]) * desconto[xx]);
+					console.log(final);
+						
 				} else {
-					final.push(quantidade_aparelhos * valor_aparelho[xx]);
+					final.push((quantidade_aparelhos * valor_aparelho[xx]));
+					console.log(final);
+					
 				}
+					
 			}
 		}
-
-
 
 		}
 

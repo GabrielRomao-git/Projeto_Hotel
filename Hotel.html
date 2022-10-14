@@ -356,57 +356,67 @@
 		}
 
 		function ar_puro() {
-			let nome_empresas = [];
-			let valor_aparelho = [];
-			const quantidade_aparelhos = [];
-			let desconto = [];
-			let numero_min = [];
-			let final = [];	
-			var jj = 0;
-			var xx = 0;
 		
-			for(jj ; jj < 10; jj++) {
-				nome_empresas.push(prompt('Qual o nome da empresa?'));
-				console.log(nome_empresas)
-				valor_aparelho.push(parseFloat(prompt('Qual o valor por aparelho?')));
-				quantidade_aparelhos.push(parseInt(prompt('Qual a quantidade de aparelhos?')));
-				desconto.push(parseInt(prompt('Qual a porcentagem de desconto?')));
-				numero_min.push(parseInt(prompt('Qual o número mínimo de aparelhos para conseguir o desconto?')));
-				var deseja = prompt(`Deseja informar novos dados, ${nome_usuario}? (S/N)`);
-				if(deseja === 'N' || deseja === 'Não') {
-					conta();
-					xx++;
-					let min = Math.min(...final);
-					console.log(min);
-					let menor = final.indexOf(min);
-					console.log(menor);
-					alert(`${nome_usuario}, o orçamento de menor valor é o da ${nome_empresas[menor]} que custará: R$${min}.`);
-					jj = 10;
-				} else if (deseja === 'S' || deseja === 'Sim') {
-					alert('Então vamos lá!');
-				} else {
-					alert('Informação inválida, tente novamente.');
-					var deseja = prompt(`Deseja informar novos dados, ${nome_usuario}? (S/N)`);
-				}
-			}
+		let empresas = [];
+			let orcamento = [];
+			var nomeEmpresa;
+			var confirma = 'S';
+			var valorAparelho, qtdAparelhos, porcDesconto, minAparelho, desconto = 0, soma = 0, valorFinal = 0;
 			
-		function conta () {
-			console.log(xx);
-			for(x = 0 ; x < jj; x++) {
-				desconto[xx] = (desconto[xx] /100);
-				console.log(desconto);
-				if (quantidade_aparelhos >= numero_min[xx]){
-					final.push((quantidade_aparelhos * valor_aparelho[xx]) * desconto[xx]);
-					console.log(final);
-						
-				} else {
-					final.push((quantidade_aparelhos * valor_aparelho[xx]));
-					console.log(final);
-					
+			while(confirma == 'S' || confirma == 's' ){
+				nomeEmpresa = prompt('Qual o nome da empresa?');
+				empresas.push(nomeEmpresa);
+
+				valorAparelho = parseFloat(prompt('Qual o valor por aparelho?'));
+				while(isNaN(valorAparelho) || valorAparelho === ' '|| valorAparelho <= 0){
+					alert('Por favor, informe apenas números válidos');
+					valorAparelho = parseFloat(prompt('Qual o valor por aparelho?'));
 				}
-					
+
+				qtdAparelhos = parseInt(prompt('Qual a quantidade de aparelho?'));
+				while(isNaN(qtdAparelhos) || qtdAparelhos === ' ' || qtdAparelhos <= 0){
+					alert('Por favor, informe apenas números válidos');
+					qtdAparelhos = parseInt(prompt('Qual a quantidade de aparelho?'));
+				}
+
+				porcDesconto = parseFloat(prompt('Qual a porcentagem de desconto?'));
+				while(isNaN(porcDesconto) || porcDesconto === ' ' || porcDesconto < 0){
+					alert('Por favor, informe apenas números válidos');
+					porcDesconto = parseFloat(prompt('Qual a porcentagem de desconto?'));
+				}
+
+				minAparelho = parseInt(prompt('Qual o número mínimo de aparelhos para conseguir desconto?'));
+				while(isNaN(minAparelho) || minAparelho === ' ' || minAparelho < 0){
+					alert('Por favor, informe apenas números válidos');
+					minAparelho = parseInt(prompt('Qual o número mínimo de aparelhos para conseguir desconto?'));
+				}
+
+				soma = (valorAparelho * qtdAparelhos);
+				desconto = (soma * porcDesconto)/100;
+				valorFinal = (soma - desconto).toFixed(2);
+				orcamento.push(valorFinal);
+
+				if(minAparelho <= qtdAparelhos){
+					alert(`Aee desconto 🤩 de R$${desconto}`);
+					alert(`O serviço de ${nomeEmpresa} custará R$${valorFinal}`);
+				}
+				else{
+					alert('Sem desconto 🙁');
+					alert(`O serviço de ${nomeEmpresa} custará R$${soma}`);
+				}
+				
+				confirma = prompt(`Deseja informar novos dados, ${nome_usuario}? (S/N)`);
 			}
-		}
+
+
+			var minValor = Math.min(...orcamento).toFixed(2);
+			var index = orcamento.indexOf(minValor);
+
+			console.log(index);
+
+			alert(`O orçamento de menor valor é o ${empresas[index]} por ${minValor}`);
+			
+			inicio();
 
 		}
 
@@ -455,23 +465,6 @@
 		inicio()
 	</script>
 
-<!--[if gte mso 9]><xml>
-<mso:CustomDocumentProperties>
-<mso:xd_Signature msdt:dt="string"></mso:xd_Signature>
-<mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Editor msdt:dt="string">GABRIEL AUGUSTO SANDINS TEIXEIRA DE AZEVEDO</mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Editor>
-<mso:Order msdt:dt="string">1000.00000000000</mso:Order>
-<mso:ComplianceAssetId msdt:dt="string"></mso:ComplianceAssetId>
-<mso:TemplateUrl msdt:dt="string"></mso:TemplateUrl>
-<mso:ReferenceId msdt:dt="string"></mso:ReferenceId>
-<mso:xd_ProgID msdt:dt="string"></mso:xd_ProgID>
-<mso:_ExtendedDescription msdt:dt="string"></mso:_ExtendedDescription>
-<mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Author msdt:dt="string">GABRIEL AUGUSTO SANDINS TEIXEIRA DE AZEVEDO</mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Author>
-<mso:TriggerFlowInfo msdt:dt="string"></mso:TriggerFlowInfo>
-<mso:ContentTypeId msdt:dt="string">0x010100DDF53806D1C7CF41A897F56557289E5C</mso:ContentTypeId>
-<mso:_SourceUrl msdt:dt="string"></mso:_SourceUrl>
-<mso:_SharedFileIndex msdt:dt="string"></mso:_SharedFileIndex>
-</mso:CustomDocumentProperties>
-</xml><![endif]-->
 <title></title></head>
 
 <body>
